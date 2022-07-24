@@ -1,4 +1,4 @@
-import { ref, computed } from "vue";
+import { ref, computed, pushScopeId } from "vue";
 
 export function useArticleList() {
   const articles = ref([]);
@@ -22,10 +22,10 @@ export function useArticleList() {
     };
     countArticlesShow.value = 0;
     totalArticles.value = 0;
+    articles.value = [];
   }
 
   function getMoreArticle(reset = false, search = "", filter = "") {
-    console.log("getMoreArticle");
     if (reset) {
       resetCount(search, filter);
     }
@@ -35,7 +35,7 @@ export function useArticleList() {
     fetch(lastResponse.value.next)
       .then((response) => response.json())
       .then(({ data, to, total, next_page_url }) => {
-        articles.value = [...data];
+        articles.value.push(...data);
 
         lastResponse.value.next = next_page_url;
 
@@ -63,5 +63,5 @@ export function useArticleList() {
     resetCount,
     count: countArticlesShow,
     total: totalArticles,
-  };
+  } ;
 }
