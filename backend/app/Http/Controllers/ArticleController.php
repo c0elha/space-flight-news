@@ -31,7 +31,10 @@ class ArticleController extends Controller
         $per_page = 10;
         $current_page = $request->page ?: 1;
 
-        $responses = $articles->skip($per_page * ($current_page - 1))->take($per_page)->get();
+        $responses = $articles->skip($per_page * ($current_page - 1))
+            ->take($per_page)
+            ->with('events', 'launches')
+            ->get();
 
         return new LengthAwarePaginator($responses, $count, $per_page, $current_page, [
             'path' => request()->url(),

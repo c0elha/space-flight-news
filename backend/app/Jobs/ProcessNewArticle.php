@@ -73,7 +73,7 @@ class ProcessNewArticle implements ShouldQueue
 
     private function _articlesCreateOrUpdate(array $data)
     {
-        return Article::create([
+        return Article::updateOrCreate([
                 'id' => $data['id'],
                 'featured' => $data['featured'],
                 'title' => $data['title'],

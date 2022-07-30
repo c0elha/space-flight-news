@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Jenssegers\Mongodb\Eloquent\Model;
-use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Model
 {
@@ -14,15 +14,15 @@ class Article extends Model
 
     protected $fillable = ['id', 'featured', 'title', 'url', 'imageUrl', 'newsSite', 'summary', 'publishedAt'];
 
-    protected $hidden = ['_id', 'created_at', 'updated_at'];
+    protected $hidden = ['_id', 'pivot', 'created_at', 'updated_at'];
 
     public function events()
     {
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Event::class, 'article_events');
     }
 
     public function launches()
     {
-        return $this->belongsToMany(Launche::class);
+        return $this->belongsToMany(Launche::class, 'article_launches');
     }
 }

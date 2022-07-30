@@ -3,11 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Http\Services\PopulateArticleService;
-use App\Jobs\ProcessNewArticle;
-use App\Models\Article;
-use App\Models\PopulateArticleCallLog;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
 
 class PopulateArticles extends Command
 {

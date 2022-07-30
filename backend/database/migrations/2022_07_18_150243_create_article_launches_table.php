@@ -14,11 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('article_launches', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('article_id');
-            $table->foreignUuid('launche_id');
+            $table->uuid('launche_id');
+            $table->timestamps();
 
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
-            $table->foreignUuid('launche_id')->references('id')->on('launches')->onDelete('cascade');
+            $table->foreign('launche_id')->references('id')->on('launches')->onDelete('cascade');
         });
     }
 
