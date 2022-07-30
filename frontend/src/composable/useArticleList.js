@@ -1,11 +1,12 @@
-import { ref, computed, pushScopeId } from "vue";
+import { ref, computed } from "vue";
 
 export function useArticleList() {
+  const baseURL = `${import.meta.env.VITE_URL_API}/api/article`;
   const articles = ref([]);
   const countArticlesShow = ref(0);
   const totalArticles = ref(0);
   const lastResponse = ref({
-    next: "http://0.0.0.0/api/article",
+    next: `${baseURL}`,
     count: null,
   });
 
@@ -17,7 +18,7 @@ export function useArticleList() {
 
   function resetCount(search, filter = "") {
     lastResponse.value = {
-      next: `http://0.0.0.0/api/article?search=${search}&filter=${filter}`,
+      next: `${baseURL}?search=${search}&filter=${filter}`,
       count: null,
     };
     countArticlesShow.value = 0;
@@ -45,7 +46,7 @@ export function useArticleList() {
   }
 
   function getSearchArticle(search, filter = "") {
-    fetch(`http://0.0.0.0/api/article?search=${search}&filter=${filter}`)
+    fetch(`${baseURL}?search=${search}&filter=${filter}`)
       .then((response) => response.json())
       .then(({ data, to, total, next_page_url }) => {
         articles.value = [...data];

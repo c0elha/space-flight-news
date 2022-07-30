@@ -4,7 +4,7 @@
             class="w-64 md:mr-8"
             :class="{ 'md:mr-0 md:ml-8': is_odd }"
             :src="article.imageUrl"
-            @error="article.imageUrl = '../../src/assets/img/no-image.png'"
+            @error="article.imageUrl = '/no-image.png'"
         />
         <div class="flex-1 mr-2" :class="{ 'md:mr-0': is_odd }">
             <h3 class="font-semibold text-lg mb-1">{{ article.title }}</h3>
